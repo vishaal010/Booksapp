@@ -1,0 +1,37 @@
+<h1>Dashboard</h1>
+<h3>Welkom {{name}}</h3>
+<p> Hier zijn jou verhalen</p>
+{{#if stories}}
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th> Titel </th>
+                    <th> Datum </th>
+                    <th> Status </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each stories}}
+                <tr>
+                    <td><a href="/stories/{{_id}}">{{title}}</a></td>
+                    <td>{{formatDate created_at 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
+                    <td> <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                    <i class="fas fa-edit"></i></a>
+
+                    <form action="/stories/{{_id}}" method="post" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn-red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    </form>
+
+                    
+                    </td>
+                </tr>                    
+                {{/each}}
+            </tbody>
+        </table>
+{{else}}
+<p> Je hebt geen verhalen gemaakt! </p>
+{{/if}}
